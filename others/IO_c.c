@@ -49,7 +49,7 @@ static inline void write(int x)
         x = -x, push('-');
     work_wt(x);
 }
-static inline void writestr(char *s)
+static inline void writestr(const char *s)
 {
     int n = strlen(s);
     for (int i = 0; i < n; i++)

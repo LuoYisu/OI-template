@@ -75,7 +75,7 @@ namespace IO
                 x = -x, push('-');
             work_wt(x);
         }
-        inline void writestr(char *s)
+        inline void writestr(const char *s)
         {
             int n = strlen(s);
             for (int i = 0; i < n; i++)

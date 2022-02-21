@@ -83,8 +83,8 @@ inline bool intersect(const line &a, const line &b)                             
 }
 inline bool intersect_l_s(const line &a, const line &b) // 直线与线段之间交点
 {
-    line p(a.x - a.d * 1e9, a.x + a.d * 1e9);
-    return intersect(p, b);
+    V x = a.b - a.a;
+    return ((b.a - a.b) & x) * ((b.b - a.b) & x) < eps;
 }
 inline V cross_point(const line &a, const line &b) // 交点
 {

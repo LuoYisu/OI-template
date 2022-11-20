@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 #define mxsiz 1 << 20
 
 char inbuf[mxsiz], *p1, *p2;
@@ -7,7 +8,6 @@ char outbuf[mxsiz], *op = outbuf;
 
 #define gc() (p1 == p2 && (p2 = (p1 = inbuf) + fread(inbuf, 1, mxsiz, stdin), p1 == p2) ? EOF : *p1++)
 
-#define isdigit(x) (x >= '0' && x <= '9') // 防止忘记打 <cctype> 头文件
 static inline int read()
 {
     int x = 0, f = 1;
@@ -19,11 +19,7 @@ static inline int read()
         x = x * 10 + ch - '0';
     return x * f;
 }
-#undef isdigit
-static inline int ischar(char x)
-{
-    return x >= 'A' && x <= 'z';
-}
+static inline int ischar(char x) { return x >= 'A' && x <= 'z'; }
 static inline char readchar()
 {
     char ch = gc();

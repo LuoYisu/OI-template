@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <cstring>
+#include <cctype>
 
 namespace IO
 {
@@ -12,11 +13,12 @@ namespace IO
         ~IO() { fwrite(outbuf, 1, op - outbuf, stdout); }
         inline char gc()
         {
-            return p1 == p2 && (p2 = (p1 = inbuf) + fread(inbuf, 1, mxsiz, stdin), p1 == p2) ? EOF : *p1++;
+            if (p1 == p2)
+                p1 = inbuf, p2 = p1 + std::fread(inbuf, 1, mxsiz, stdin);
+            return p1 == p2 ? EOF : *p1++;
         }
-#define isdigit(x) (x >= '0' && x <= '9') // 防止忘记打 <cctype> 头文件
         template <typename T>
-        inline T rd()
+        inline T read()
         {
             T x = 0, f = 1;
             char ch = gc();
@@ -40,13 +42,9 @@ namespace IO
                 x = x * 10 + ch - '0';
             x *= f;
         }
-#undef isdigit
-        inline int read()
-        {
-            return rd<int>();
-        }
-        inline long long readll() { return rd<long long>(); }
-        inline __int128 read128() { return rd<__int128>(); }
+        inline int read() { return read<int>(); }
+        inline long long readll() { return read<long long>(); }
+        inline __int128 readlll() { return read<__int128>(); }
         inline bool ischar(char x) { return x >= 'A' && x <= 'z'; }
         inline char readchar()
         {
@@ -92,6 +90,4 @@ using IO::io;
 
 int main()
 {
-    long long x = io.readll();
-    io.writeln(x);
 }
